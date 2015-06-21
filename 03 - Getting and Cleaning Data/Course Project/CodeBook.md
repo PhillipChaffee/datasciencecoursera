@@ -2,14 +2,14 @@
 
 ##How to read the variables
 
--There are only 66 variables included from the original data. They are the measurements pertaining to the mean and standard deviation for each filtered axial signal
+- There are only 66 variables included from the original data. They are the measurements pertaining to the mean and standard deviation for each filtered axial signal
 
--Each variable in this data set is the mean/average value of the original data set value, averaged for the current subject and activity.
+- Each variable in this data set is the mean/average value of the original data set value, averaged for the current subject and activity.
 
--So row one column one is the average of the tBodyAccmeanX measurements gathered for subject one while walking.
+- So row one column one is the average of the tBodyAccmeanX measurements gathered for subject one while walking.
 
--Measurements prefixed by t are time domain signals captured at a constant rate of 50 Hz.
- Measurements prefixed by f are frequency domain signals gathered by applying a Fast Fourier Transform (FFT).
+- Measurements prefixed by t are time domain signals captured at a constant rate of 50 Hz.
+  Measurements prefixed by f are frequency domain signals gathered by applying a Fast Fourier Transform (FFT).
 
 ##Variable Descriptions
 
