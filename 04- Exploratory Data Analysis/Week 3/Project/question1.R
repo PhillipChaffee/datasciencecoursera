@@ -1,0 +1,5 @@
+sccPM25 <- readRDS("summarySCC_PM25.rds")
+png(file="question1.png")
+with(sccPM25, plot(year, Emissions, ylab="Emissions", xlab="Year"))
+with(sccPM25, abline(lm(Emissions ~ year)))
+dev.off()
