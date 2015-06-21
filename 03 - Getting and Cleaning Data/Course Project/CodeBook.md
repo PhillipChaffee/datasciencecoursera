@@ -2,7 +2,7 @@
 
 ##How to read the variables
 
-- There are only 66 variables included from the original data. They are the measurements pertaining to the mean and standard deviation for each filtered axial signal
+- There are only 66 variables included from the original data. They are the measurements pertaining to the mean and standard deviation for each filtered axial signal.
 
 - Each variable in this data set is the mean/average value of the original data set value, averaged for the current subject and activity.
 
