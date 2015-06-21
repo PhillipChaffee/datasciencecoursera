@@ -2,13 +2,13 @@
 
 ##Data used for this project
 
--Website - http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
--Direct Link - https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+- Website - http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+- Direct Link - https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 ##Included in this repo
 
--run_analysis.R - An R script used to take the provided data and create a small, clean, tidy data set.
--CodeBook.md - The code book describing the used variables and how to read them.
+- run_analysis.R - An R script used to take the provided data and create a small, clean, tidy data set.
+- CodeBook.md - The code book describing the used variables and how to read them.
 
 ##Tidy Data Set <- Data Set
 
