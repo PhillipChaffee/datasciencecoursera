@@ -79,3 +79,5 @@
 64. fBodyBodyGyroMagstd - Standard deviation value of body gyro magnitude.
 65. fBodyBodyGyroJerkMagmean - Mean value of body gyro jerk magnitude.
 66. fBodyBodyGyroJerkMagstd - Standard deviation value of body gyro jerk magnitude.
+67. Subject - Subject who performed the activity
+68. Activity - Current activity
