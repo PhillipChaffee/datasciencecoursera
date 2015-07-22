@@ -25,15 +25,43 @@ First, we will download and store the data.
 ```{r download and store, cache=TRUE}
 download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2", destfile="StormData.csv")
 
-stormdata <- read.csv("StormData.csv")
+stormdata <- read.csv(bzfile("StormData.csv"))
 ```
 
-So, what variables do we have to work with?
+What variables do we have to work with?
 
 ```{r storm variables}
 colnames(stormdata)
+head(stormdata)
 ```
 
+We need the variables that have to do with storm type, health effects, and economic effects. These seem to be EVTYPE, PROPDMG, PROPDMGEXP, CROPDMG, and CROPDMGEXP. So let's subset to a data set with only these variables.
+
+```{r subset dataset}
+columns <- c("EVTYPE", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")
+stormdata <- stormdata[,columns]
+head(stormdata)
+```
+
+It also seems that the damage numbers need to be multiplied by their corresponding exponet. Let's do that and shrink the dataset even more.
+
+```{r damage variables, cache=TRUE}
+for(i in 1:length(stormdata$EVTYPE)) {
+  if(stormdata[i,3]=="K"){
+    stormdata[i,2] <- stormdata[i,2]*1000
+  }else if(stormdata[i,5]=="K"){
+    stormdata[i,4] <- stormdata[i,4]*1000
+  }
+  if(stormdata[i,3]=="M"){
+    stormdata[i,2] <- stormdata[i,2]*1000000
+  }else if(stormdata[i,5]=="M"){
+    stormdata[i,4] <- stormdata[i,4]*1000000
+  }
+}
+
+columns <- c("EVTYPE", "PROPDMG", "CROPDMG")
+stormdata <- stormdata[,columns]
+head(stormdata)
 ##Data Analysis
 
 

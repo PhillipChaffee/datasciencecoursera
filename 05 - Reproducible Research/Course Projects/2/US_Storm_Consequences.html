@@ -80,8 +80,8 @@ img {
 <p>First, we will download and store the data.</p>
 <pre class="r"><code>download.file(&quot;http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2&quot;, destfile=&quot;StormData.csv&quot;)
 
-stormdata &lt;- read.csv(&quot;StormData.csv&quot;)</code></pre>
-<p>So, what variables do we have to work with?</p>
+stormdata &lt;- read.csv(bzfile(&quot;StormData.csv&quot;))</code></pre>
+<p>What variables do we have to work with?</p>
 <pre class="r"><code>colnames(stormdata)</code></pre>
 <pre><code>##  [1] &quot;STATE__&quot;    &quot;BGN_DATE&quot;   &quot;BGN_TIME&quot;   &quot;TIME_ZONE&quot;  &quot;COUNTY&quot;    
 ##  [6] &quot;COUNTYNAME&quot; &quot;STATE&quot;      &quot;EVTYPE&quot;     &quot;BGN_RANGE&quot;  &quot;BGN_AZI&quot;   
@@ -91,6 +91,53 @@ stormdata &lt;- read.csv(&quot;StormData.csv&quot;)</code></pre>
 ## [26] &quot;PROPDMGEXP&quot; &quot;CROPDMG&quot;    &quot;CROPDMGEXP&quot; &quot;WFO&quot;        &quot;STATEOFFIC&quot;
 ## [31] &quot;ZONENAMES&quot;  &quot;LATITUDE&quot;   &quot;LONGITUDE&quot;  &quot;LATITUDE_E&quot; &quot;LONGITUDE_&quot;
 ## [36] &quot;REMARKS&quot;    &quot;REFNUM&quot;</code></pre>
+<pre class="r"><code>head(stormdata)</code></pre>
+<pre><code>##   STATE__           BGN_DATE BGN_TIME TIME_ZONE COUNTY COUNTYNAME STATE
+## 1       1  4/18/1950 0:00:00     0130       CST     97     MOBILE    AL
+## 2       1  4/18/1950 0:00:00     0145       CST      3    BALDWIN    AL
+## 3       1  2/20/1951 0:00:00     1600       CST     57    FAYETTE    AL
+## 4       1   6/8/1951 0:00:00     0900       CST     89    MADISON    AL
+## 5       1 11/15/1951 0:00:00     1500       CST     43    CULLMAN    AL
+## 6       1 11/15/1951 0:00:00     2000       CST     77 LAUDERDALE    AL
+##    EVTYPE BGN_RANGE BGN_AZI BGN_LOCATI END_DATE END_TIME COUNTY_END
+## 1 TORNADO         0                                               0
+## 2 TORNADO         0                                               0
+## 3 TORNADO         0                                               0
+## 4 TORNADO         0                                               0
+## 5 TORNADO         0                                               0
+## 6 TORNADO         0                                               0
+##   COUNTYENDN END_RANGE END_AZI END_LOCATI LENGTH WIDTH F MAG FATALITIES
+## 1         NA         0                      14.0   100 3   0          0
+## 2         NA         0                       2.0   150 2   0          0
+## 3         NA         0                       0.1   123 2   0          0
+## 4         NA         0                       0.0   100 2   0          0
+## 5         NA         0                       0.0   150 2   0          0
+## 6         NA         0                       1.5   177 2   0          0
+##   INJURIES PROPDMG PROPDMGEXP CROPDMG CROPDMGEXP WFO STATEOFFIC ZONENAMES
+## 1       15    25.0          K       0                                    
+## 2        0     2.5          K       0                                    
+## 3        2    25.0          K       0                                    
+## 4        2     2.5          K       0                                    
+## 5        2     2.5          K       0                                    
+## 6        6     2.5          K       0                                    
+##   LATITUDE LONGITUDE LATITUDE_E LONGITUDE_ REMARKS REFNUM
+## 1     3040      8812       3051       8806              1
+## 2     3042      8755          0          0              2
+## 3     3340      8742          0          0              3
+## 4     3458      8626          0          0              4
+## 5     3412      8642          0          0              5
+## 6     3450      8748          0          0              6</code></pre>
+<p>We need the variables that have to do with storm type, health effects, and economic effects. These seem to be EVTYPE, PROPDMG, PROPDMGEXP, CROPDMG, and CROPDMGEXP. So let’s subset to a data set with only these variables.</p>
+<pre class="r"><code>columns &lt;- c(&quot;EVTYPE&quot;, &quot;PROPDMG&quot;, &quot;PROPDMGEXP&quot;, &quot;CROPDMG&quot;, &quot;CROPDMGEXP&quot;)
+stormdata &lt;- stormdata[,columns]
+head(stormdata)</code></pre>
+<pre><code>##    EVTYPE PROPDMG PROPDMGEXP CROPDMG CROPDMGEXP
+## 1 TORNADO    25.0          K       0           
+## 2 TORNADO     2.5          K       0           
+## 3 TORNADO    25.0          K       0           
+## 4 TORNADO     2.5          K       0           
+## 5 TORNADO     2.5          K       0           
+## 6 TORNADO     2.5          K       0</code></pre>
 </div>
 <div id="data-analysis" class="section level2">
 <h2>Data Analysis</h2>
