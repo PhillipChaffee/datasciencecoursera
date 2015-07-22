@@ -1,0 +1,7 @@
+---
+title: "US Storm Consequences"
+author: "Phillip Chaffee"
+date: "Wednesday, July 22, 2015"
+output: html_document
+---
+
