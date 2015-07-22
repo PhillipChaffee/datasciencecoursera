@@ -5,3 +5,36 @@ date: "Wednesday, July 22, 2015"
 output: html_document
 ---
 
+##Synopsis
+
+This analysis attempts to use the National Weather Service's Storm Data Documentation to answer two questions about US storms.
+
+Which storm types are the most harmful with respect to population health?
+
+Which storm types have the greatest economic consequences?
+
+//Results synopsis here
+
+
+##Data Processing
+
+In this section we will take our raw data and transform in into something we can work with easily to answer our questions.
+
+First, we will download and store the data.
+
+```{r download and store, cache=TRUE}
+download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2", destfile="StormData.csv")
+
+stormdata <- read.csv("StormData.csv")
+```
+
+So, what variables do we have to work with?
+
+```{r storm variables}
+colnames(stormdata)
+```
+
+##Data Analysis
+
+
+##Results
