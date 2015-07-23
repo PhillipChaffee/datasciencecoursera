@@ -1,0 +1,107 @@
+---
+title: "US Storm Consequences"
+author: "Phillip Chaffee"
+date: "Wednesday, July 22, 2015"
+output: html_document
+---
+
+##Synopsis
+
+This analysis attempts to use the National Weather Service's Storm Data Documentation to answer two questions about US storms.
+
+Which storm types are the most harmful with respect to population health?
+
+Which storm types have the greatest economic consequences?
+
+//Results synopsis here
+
+
+##Data Processing
+
+In this section we will take our raw data and transform in into something we can work with easily to answer our questions.
+
+First, we will download and store the data.
+
+```{r download and store, cache=TRUE}
+download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2", destfile="StormData.csv.bz2")
+
+stormdata <- read.csv(bzfile("StormData.csv.bz2"), stringsAsFactors=F)
+```
+
+What variables do we have to work with?
+
+```{r storm variables, cache=TRUE}
+colnames(stormdata)
+head(stormdata)
+```
+
+We need the variables that have to do with storm type, health effects, and economic effects. These seem to be EVTYPE, FATALITIES, INJURIES, PROPDMG, PROPDMGEXP, CROPDMG, and CROPDMGEXP. So let's subset to a data set with only these variables.
+
+```{r subset dataset, cache=TRUE}
+columns <- c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")
+stormdata <- stormdata[,columns]
+head(stormdata)
+```
+
+It also seems that the damage numbers need to be multiplied by their corresponding exponet. Let's do that and shrink the dataset even more.
+
+```{r damage variables, cache=TRUE}
+for(i in 1:length(stormdata$EVTYPE)) {
+  if(stormdata[i,5]=="K"){
+    stormdata[i,4] <- stormdata[i,4]*1000
+  }else if(stormdata[i,7]=="K"){
+    stormdata[i,6] <- stormdata[i,6]*1000
+  }
+  if(stormdata[i,5]=="M"){
+    stormdata[i,4] <- stormdata[i,4]*1000000
+  }else if(stormdata[i,7]=="M"){
+    stormdata[i,6] <- stormdata[i,6]*1000000
+  }
+}
+
+columns <- c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "CROPDMG")
+stormdata <- stormdata[,columns]
+head(stormdata)
+```
+
+We now have a clean data set with only the variables we need to work with.
+
+##Data Analysis
+
+Which storm types are the most harmful with respect to population health?
+
+```{r population health, cache=TRUE}
+injuries <- aggregate(INJURIES ~ EVTYPE, sum, data=stormdata, na.action=na.omit)
+fatalities <- aggregate(FATALITIES ~ EVTYPE, sum, data=stormdata, na.action=na.omit)
+
+injuries<- injuries[order(-injuries$INJURIES),]
+injuries<- injuries[1:5,]
+
+fatalities <- fatalities[order(-fatalities$FATALITIES),]
+fatalities <- fatalities[1:5,]
+```
+
+Which storm types have the greatest economic consequences?
+
+```{r economic health, cache=TRUE}
+propdmg <- aggregate(PROPDMG ~ EVTYPE, sum, data=stormdata, na.action=na.omit)
+cropdmg <- aggregate(CROPDMG ~ EVTYPE, sum, data=stormdata, na.action=na.omit)
+
+propdmg <- propdmg[order(-propdmg$PROPDMG),]
+propdmg <- propdmg[1:5,]
+
+cropdmg <- cropdmg[order(-cropdmg$CROPDMG),]
+cropdmg <- cropdmg[1:5,]
+```
+
+##Results
+
+```{r graphs}
+library(lattice)
+barchart(INJURIES ~ EVTYPE, data=injuries)
+barchart(FATALITIES ~ EVTYPE, data=fatalities)
+
+par(mfrow=c(1,2), pin=c(2,5))
+pie(propdmg$PROPDMG, labels=propdmg$EVTYPE, radius=2)
+pie(cropdmg$CROPDMG, labels=cropdmg$EVTYPE, radius=2)
+```
