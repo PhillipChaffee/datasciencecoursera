@@ -13,12 +13,14 @@ Which storm types are the most harmful with respect to population health?
 
 Which storm types have the greatest economic consequences?
 
-//Results synopsis here
+The study found that the storm types with the greatest health consequences are tornado, thunderstorm wind, flood, flash flood, heat, excessive heat, and lightning.
+
+The storm types with the greatest economic consequences are drought, flood, flash flood, hail, extreme cold, frost/freeze, tornado, and hurricane.
 
 
 ##Data Processing
 
-In this section we will take our raw data and transform in into something we can work with easily to answer our questions.
+In this section we will take our raw data and transform it into something we can easily work with to answer our questions.
 
 First, we will download and store the data.
 
@@ -35,7 +37,7 @@ colnames(stormdata)
 head(stormdata)
 ```
 
-We need the variables that have to do with storm type, health effects, and economic effects. These seem to be EVTYPE, FATALITIES, INJURIES, PROPDMG, PROPDMGEXP, CROPDMG, and CROPDMGEXP. So let's subset to a data set with only these variables.
+We need the variables that have to do with storm type, health effects, and economic effects. These seem to be EVTYPE, FATALITIES, INJURIES, PROPDMG, PROPDMGEXP, CROPDMG, and CROPDMGEXP. So let's subset to a data set with only those variables.
 
 ```{r subset dataset, cache=TRUE}
 columns <- c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")
@@ -43,7 +45,7 @@ stormdata <- stormdata[,columns]
 head(stormdata)
 ```
 
-It also seems that the damage numbers need to be multiplied by their corresponding exponet. Let's do that and shrink the dataset even more.
+It also seems that the damage numbers need to be multiplied by their corresponding exponent. Let's do that and shrink the data set even more.
 
 ```{r damage variables, cache=TRUE}
 for(i in 1:length(stormdata$EVTYPE)) {
@@ -96,12 +98,34 @@ cropdmg <- cropdmg[1:5,]
 
 ##Results
 
-```{r graphs}
-library(lattice)
-barchart(INJURIES ~ EVTYPE, data=injuries)
-barchart(FATALITIES ~ EVTYPE, data=fatalities)
+####Which storm types are the most harmful with respect to population health?
 
-par(mfrow=c(1,2), pin=c(2,5))
-pie(propdmg$PROPDMG, labels=propdmg$EVTYPE, radius=2)
-pie(cropdmg$CROPDMG, labels=cropdmg$EVTYPE, radius=2)
+```{r harm graphs}
+library(lattice)
+barchart(INJURIES ~ EVTYPE, injuries)
+```
+
+The top five storms types for injuries are tornado, thunderstorm wind, lightning, flood, and excessive heat.
+
+The fatality data is a bit different, but mostly the same. Here are the exact numbers.
+
+```{r harm results}
+injuries
+fatalities
+```
+
+
+
+####Which storm types have the greatest economic consequences?
+
+```{r economic graphs}
+barchart(CROPDMG ~ EVTYPE, cropdmg)
+```
+The worst thing for crops is drought.
+
+Let's take a look at the exact numbers on crop damage and property damage by storm type.
+
+```{r economic results}
+cropdmg
+propdmg
 ```

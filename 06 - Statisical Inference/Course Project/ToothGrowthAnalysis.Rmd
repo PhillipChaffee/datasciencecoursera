@@ -1,0 +1,41 @@
+---
+title: "ToothGrowth Analysis"
+author: "Phillip Chaffee"
+date: "Sunday, July 26, 2015"
+output: pdf_document
+---
+
+#Synopsis
+
+This report takes a look at the dataset within R on tooth growth. What it is, and some comparisons of the different vairables effects on tooth growth.
+
+#Data Analysis
+
+####Load the data
+
+```{r load}
+library(datasets)
+toothgrowth <- ToothGrowth
+```
+
+####Analyze and summarize the data
+
+```{r data}
+colnames(toothgrowth)
+head(toothgrowth)
+```
+
+The data set measures tooth growth in length (len) as affected by Vitamin C administration (supp), given through ascorbic acid (VC) and orange juice (OJ) in variant doses (dose).
+
+####Explore the data
+
+Let's look at how tooth growth relates to Vitamin C dose between type of administration: orange juice or asorbuic acid.
+
+```{r admin}
+library(lattice)
+xyplot(len ~ dose | supp, data=toothgrowth, type=c("p","r"))
+```
+
+##Conclusion
+
+It seems that Vitamin C affects tooth growth no matter what, but does a better job in small doses when administered through Orange Juice.

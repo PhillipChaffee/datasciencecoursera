@@ -1,0 +1,69 @@
+---
+title: "Exp. Distribution & The Central Limit Theorem"
+author: "Phillip Chaffee"
+date: "Sunday, July 26, 2015"
+output: pdf_document
+---
+
+###Synopsis
+This report attempts to relate the exponential distribution and the Central Limit Theorem. How are they alike, and how do they differ. Can something as non-normal seeming as an exponential curve still follow the Central Limit Theorem.
+
+###Analysis
+
+First, lets define the exponential distribution. It is the probability distribution that defines the time between the separate events of a Poisson process. Events occur continuously, separately, and at a constant rate.
+
+Here is the sample of the exponential distribution that we will be working with.
+
+```{r}
+hist(rexp(1000, 1/0.2))
+```
+
+This report will attempt to show that the distribution of averages of 40 exponentials follows the Central Limit Theorem. The population mean and standard deviation of the exponential distribution are 1/lambda. For this exercise will be using 0.2 for lambda, so the sample mean and sample std should approximate 1/0.2.
+
+Here is a graph of 1000 simulations of 40 exponentials with lambda 0.2.
+
+```{r simulations}
+mns = NULL
+for (i in 1 : 1000) mns = c(mns, mean(rexp(1000, 1/0.2)))
+hist(mns)
+```
+
+It looks as if it is still forming into the bell curve of a normal distribution, contrary to it's seemingly completely non normal disposition.
+
+To support this, let's compare the sample mean and variance, to the theoretical.
+
+They mean should approximately equal
+
+```{r}
+1/0.2
+```
+
+The variance should approximately equal the standard distribution squared
+
+```{r}
+(1/0.2)^2
+```
+
+The sample mean is calculated thus.
+
+```{r}
+1/(sum(mns)/length(mns))
+```
+
+The sample variance is simply the sample mean squared, because the standard distribution is equal to the mean, and the variance is the standard distribution squared.
+
+```{r}
+(1/(sum(mns)/length(mns)))^2
+```
+
+###Result
+
+It seems that the exponential distribution follows the Central Limit Theorem based on these three observations.
+
+1. The distribution of averages of 40 exponentials sample mean approximates the theoretical mean of an exponential distribution.
+
+2. The distribution of averages of 40 exponentials sample variance approximates the theoretical mean of and exponential distribution.
+
+3. The distribution of averages of 40 exponentials, when graphed, seems to follow the bell shaped curve of a normal distribution.
+
+This report therefore concludes that an exponential distribution follows the Central Limit Theorem.
