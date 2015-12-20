@@ -1,0 +1,8 @@
+---
+title: "Practical Machine Learning Write-Up"
+author: "Phillip Chaffee"
+date: "December 20, 2015"
+output: html_document
+---
+
+
