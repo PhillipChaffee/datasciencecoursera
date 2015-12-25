@@ -3,6 +3,53 @@ title: "Practical Machine Learning Write-Up"
 author: "Phillip Chaffee"
 date: "December 20, 2015"
 output: html_document
----
+--
 
+#Abstract
 
+This project involves a set of sensor data that pertain to a dumbbell lift. Each instance has sensor readings, and a classe. The classe is a rating of lifting form. A is a proper lift. B though E are common mistakes. The goal is to build an algorithm that will predict a lift's classe given sensor data. This project subsetted the data to only the quality variables, and then built a random forest.
+
+#Analysis
+
+Analysis of the training data set showed that there were several instances of non values, characterized by NA, "", " ", and #DIV/0!. Therefore the first option performed was to read the data set in correctly.
+
+```{r Load libraries and read data, cache=TRUE}
+require(caret)
+download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", destfile = "pml-training.csv")
+training <- read.csv("pml-training.csv", na.strings = c("NA",""," ","#DIV/0!"))
+```
+
+The next step was to get an idea of the variables in the training set.
+
+```{r Analysis 1, cache=TRUE}
+colnames(training)
+```
+
+It seemed that the first seven variables had more to do with labeling the data than describing the lifts, so they were removed. To clean the data set, the columns with more than 100 NA values were also removed.
+
+```{r Analysis 2/Clean, cache=TRUE}
+training <- training[,-c(1,2,3,4,5,6,7)]
+goodData <- colSums(is.na(training)) < 100
+training <- training[,goodData]
+```
+
+That provides 52 high quality variables to work with, excluding the classe column. This is a great set to build a model on.
+
+#Methods
+
+To build the model the caret package was used. A random forest was built, using boot632 resampling.
+
+```{r Model training, cache=TRUE}
+modFit <- train(classe~., data=training, trControl=trainControl(method="boot632"))
+```
+
+#Results
+
+This model provides very high in sample accuracy as well as out of sample accuracy.
+
+```{r In sample summary, cache=TRUE}
+modFit$finalModel
+modFit$results
+```
+
+This model correctly predicted 20/20 of the training set classes.
