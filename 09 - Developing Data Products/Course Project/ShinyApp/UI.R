@@ -1,4 +1,7 @@
-library(shiny)
+require(shiny)
+require(caret)
+require(randomForest)
+require(e1071)
 shinyUI(pageWithSidebar(
   headerPanel("Eye Color Guesser"),
   sidebarPanel(

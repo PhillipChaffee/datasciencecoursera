@@ -1,0 +1,38 @@
+{
+    "data" : [
+        "> ",
+        "devtools::install_github('rstudio/shinyapps')",
+        "Downloading GitHub repo rstudio/shinyapps@master\nfrom URL https://api.github.com/repos/rstudio/shinyapps/zipball/master\n",
+        "Installing shinyapps\n",
+        "Installing 6 packages: base64enc, digest, packrat, PKI, RCurl, yaml\n",
+        "package ‘base64enc’ successfully unpacked and MD5 sums checked\npackage ‘digest’ successfully unpacked and MD5 sums checked\n",
+        "Warning:",
+        " cannot remove prior installation of package ‘digest’\n",
+        "package ‘packrat’ successfully unpacked and MD5 sums checked\npackage ‘PKI’ successfully unpacked and MD5 sums checked\npackage ‘RCurl’ successfully unpacked and MD5 sums checked\npackage ‘yaml’ successfully unpacked and MD5 sums checked\n",
+        "\"C:/Users/parts/AppData/Local/R-PORT~1/App/R-PORT~1/bin/x64/R\" --no-site-file  \\\n  --no-environ --no-save --no-restore CMD INSTALL  \\\n  \"C:/Users/parts/AppData/Local/Temp/Rtmpyc8jvh/devtools10ec1b823828/rstudio-shinyapps-4dd3a9d\"  \\\n  --library=\"C:/Users/parts/AppData/Local/R-Portable/App/R-Portable/library\"  \\\n  --install-tests \n",
+        "\n",
+        "ERROR: dependency 'digest' is not available for package 'shinyapps'\n* removing 'C:/Users/parts/AppData/Local/R-Portable/App/R-Portable/library/shinyapps'\n",
+        "Error: Command failed (1)\n",
+        "> ",
+        "install.packages(\"digest\")",
+        "Error in install.packages : Updating loaded packages\n\nRestarting R session...\n\n"
+    ],
+    "type" : [
+        0,
+        1,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        2,
+        3,
+        3,
+        2,
+        3,
+        0,
+        1,
+        2
+    ]
+}
