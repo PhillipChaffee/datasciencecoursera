@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eye Color from Hair Color and Sex</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Eye Color from Hair Color and Sex">
+  <meta name="author" content="Phillip Chaffee">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Eye Color from Hair Color and Sex</h1>
+    <h2></h2>
+    <p>Phillip Chaffee<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Eye Color Guesser</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>This project takes hair color and sex as inputs and makes a guess at eye color.</li>
+<li>It uses the HairEyeColor dataset from the R datasets package.</li>
+<li>It is just for fun! </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Prediction Model</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>It uses a random forest fit to predict eye color from hair color and sex.</li>
+<li>HairEyeColor is a table. It is transformed into a data frame using as.data.frame.table()</li>
+<li>Then fit using caret:</li>
+</ul>
+
+<pre><code class="r">suppressMessages(require(caret))
+suppressMessages(require(e1071))
+suppressMessages(require(datasets))
+data &lt;- as.data.frame.table(HairEyeColor)
+suppressMessages(fit &lt;- train(Eye ~ Hair+Sex, data=data, method=&quot;rf&quot;, weights = data$Freq))
+fit$results
+</code></pre>
+
+<pre><code>##   mtry    Accuracy      Kappa AccuracySD    KappaSD
+## 1    2 0.006190476 -0.2658472 0.02149461 0.08186349
+## 2    3 0.006190476 -0.2729271 0.02149461 0.07553391
+## 3    4 0.006190476 -0.2850386 0.02149461 0.08193343
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Accuracy</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>It only has an accuracy of less than 1% because the data set is so limited in size.</li>
+<li>That is why it is only a guess and just for fun!</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Final Thoughts</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>It was just for fun, but it still taught me Slidify and Shiny well.</li>
+<li>This is my final class in the specialization. I have enjoyed class with you all!</li>
+<li>I hope to see and work with you in the capstone!</li>
+<li>Good luck to all my fellow classmates!</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Eye Color Guesser'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Prediction Model'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Accuracy'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Final Thoughts'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
