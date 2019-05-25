@@ -2,13 +2,13 @@
 
 This repository exists as part of my taking the Data Science Specialization on Coursera. All my work will be shared/documented here.
 
-##Course Goals
+## Course Goals
 
 1. Formulate context-relevant questions and hypotheses to drive data scientific research
 2. Identify, obtain, and transform a data set to make it suitable for the production of statistical evidence communicated in written form
 3. Build models based on new data types, experimental design, and statistical inference
 
-##Course Classes
+## Course Classes
 
 1. The Data Scientist's Toolbox
 2. Introduction to R Programming
